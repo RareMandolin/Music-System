@@ -46,8 +46,8 @@ public class libraryItem {
         this.name = name;
     }
 
-    public void setCreator(User Creator) {
-        this.Creator = Creator;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public void setLength(double length) {
