@@ -3,12 +3,16 @@ package com.mycompany.app;
 import java.time.LocalDate;
 
 public class LibraryItem {
+    private int id;
     private String name;
     private User creator;
     private double length;
     private LocalDate creationDate;
 
+    private static int nextId = 1;
+
     public LibraryItem(String name, User creator, double length) {
+        id = nextId++;
         this.name = name;
         this.creator = creator;
         this.length = length;
@@ -40,6 +44,10 @@ public class LibraryItem {
 
     public LocalDate getCreationDate() {
         return creationDate;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setName(String name) {
