@@ -10,6 +10,7 @@ public abstract class User {
     public User(String name, Origin origin) {
         this.name = name;
         this.origin = origin;
+        creationDate = LocalDate.now();
     }
 
     @Override
