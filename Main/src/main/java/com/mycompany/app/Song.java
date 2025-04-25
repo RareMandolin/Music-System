@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class Song extends LibraryItem {
     private Genre genre;
 
-    public Song(String name, User creator, double length, Genre genre) {
+    public Song(String name, Artist creator, double length, Genre genre) {
         super(name, creator, length);
         this.genre = genre;
     }

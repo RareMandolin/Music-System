@@ -19,6 +19,28 @@ public class Playlist extends LibraryItem {
         this.isVisible = isVisible;
     }
 
+    public boolean makeVisible() {
+        if (isVisible) return false;
+
+        isVisible = true;
+        return true;
+    }
+
+    public boolean add(Song song) {
+        if (tracks.contains(song)) return false;
+        tracks.add(song);
+        tracksQuantity++;
+
+        return true;
+    }
+
+    public boolean add(List<Song> songs) {
+        boolean successful = false;
+        for (Song song : songs) successful = add(song);
+
+        return successful;
+    }
+
     public void export() {
         //TODO
     }
