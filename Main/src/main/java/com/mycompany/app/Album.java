@@ -9,6 +9,7 @@ public class Album extends LibraryItem {
     private Set<Artist> artists;
     private int tracksQuantity;
     private boolean isReleased;
+    private Genre genre;
 
     public Album(String name, Artist creator, boolean isReleased) {
         super(name, creator, 0);
@@ -41,6 +42,23 @@ public class Album extends LibraryItem {
         return successful;
     }
 
+    public String toString() {
+        return String.format("Album{%1s, %2s, %3s, %4d, %5b, %6s}", super.toString(), tracks.toString(), artists.toString(), tracksQuantity, isReleased, genre);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        Album that = (Album) obj;
+
+        return tracks.equals(that.getTracks())
+            && artists.equals(that.getArtists())
+            && tracksQuantity == that.getTracksQuantity()
+            && isReleased == that.isReleased()
+            && genre.equals(that.getGenre());
+    }
+
     public Set<Song> getTracks() {
         return tracks;
     }
@@ -55,5 +73,13 @@ public class Album extends LibraryItem {
 
     public boolean isReleased() {
         return isReleased;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 }

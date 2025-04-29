@@ -42,7 +42,28 @@ public class Playlist extends LibraryItem {
     }
 
     public void export() {
+        final String PATH = "C:\\Users\\Admin\\Desktop\\MusicSystem\\Main\\src\\resources\\export.csv";
+        export(PATH);
+    }
+
+    public void export(String path) {
+        final String PATH = path;
         //TODO
+    }
+
+    public String toString() {
+        return String.format("Playlist{%1s, %2s, %3d, %4b}", super.toString(), tracks.toString(), tracksQuantity, isVisible);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        Playlist that = (Playlist) obj;
+
+        return tracks.equals(that.getTracks())
+            && tracksQuantity == that.getTracksQuantity()
+            && isVisible == that.isVisible();
     }
 
     public List<Song> getTracks() {

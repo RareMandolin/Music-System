@@ -31,15 +31,24 @@ public class Song extends LibraryItem {
         }
     }
 
+    public String toString() {
+        return String.format("Song{%1s, %2s}", super.toString(), genre);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        Song that = (Song) obj;
+
+        return genre.equals(that.getGenre());
+    }
+
     public Genre getGenre() {
         return genre;
     }
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public enum Genre {
-        RAP, POP, CLASSICAL, JAZZ, ROCK
     }
 }

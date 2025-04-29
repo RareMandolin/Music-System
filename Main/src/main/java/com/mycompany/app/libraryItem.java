@@ -26,6 +26,18 @@ public class LibraryItem {
         this.creationDate = creationDate;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        LibraryItem that = (LibraryItem) obj;
+
+        return name.equals(that.getName())
+            && creator.equals(that.getCreator())
+            && length == that.getLength()
+            && creationDate.equals(that.getCreationDate());
+    }
+
     public String toString() {
         return String.format("LibraryItem{%1s, %2s, %3d, %4s}", name, creator.toString(), length, creationDate);
     }
@@ -64,5 +76,9 @@ public class LibraryItem {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public enum Genre {
+        RAP, POP, CLASSICAL, JAZZ, ROCK
     }
 }
