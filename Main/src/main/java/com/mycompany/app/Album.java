@@ -12,7 +12,7 @@ public class Album extends LibraryItem {
     private Genre genre;
 
     public Album(String name, Artist creator) {
-        super(name, creator, 0);
+        super(name, creator);
         tracks = new HashSet<>();
         artists = new HashSet<>();
         tracksQuantity = 0;
@@ -33,18 +33,16 @@ public class Album extends LibraryItem {
 
         tracks.add(song);
         tracksQuantity++;
+        setLength(getLength() + song.getLength());
 
         if (!artists.contains(song.getCreator())) artists.add((Artist) song.getCreator());
         return true;
     }
 
-    public boolean add(List<Song> songs) {
-        if (songs == null) return false;
+    public void add(List<Song> songs) {
+        if (songs == null) return;
 
-        boolean successful = false;
-        for (Song song : songs) successful = add(song);
-
-        return successful;
+        for (Song song : songs) add(song);
     }
 
     public String toString() {

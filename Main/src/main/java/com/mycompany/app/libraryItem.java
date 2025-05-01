@@ -11,25 +11,26 @@ public class LibraryItem {
 
     private static int nextId = 1;
 
-    public LibraryItem(String name, User creator, double length) {
+    public LibraryItem(String name, User creator) {
         id = nextId++;
         this.name = name;
         this.creator = creator;
-        this.length = length;
+        length = 0;
         creationDate = LocalDate.now();
     }
 
-    public LibraryItem(String name, User creator, double length, LocalDate creationDate) {
+    public LibraryItem(String name, User creator, LocalDate creationDate) {
+        id = nextId++;
         this.name = name;
         this.creator = creator;
-        this.length = length;
+        length = 0;
         this.creationDate = creationDate;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        
         LibraryItem that = (LibraryItem) obj;
 
         return name.equals(that.getName())
@@ -39,7 +40,7 @@ public class LibraryItem {
     }
 
     public String toString() {
-        return String.format("LibraryItem{%1s, %2s, %3d, %4s}", name, creator.toString(), length, creationDate);
+        return String.format("LibraryItem{%1s, %2s, %3f, %4s}", name, creator.toString(), length, creationDate);
     }
 
     public String getName() {

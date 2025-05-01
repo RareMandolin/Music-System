@@ -39,7 +39,7 @@ public class Song extends LibraryItem {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (!super.equals(obj)) return false;
         Song that = (Song) obj;
 
         return genre == that.getGenre();

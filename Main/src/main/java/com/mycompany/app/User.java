@@ -1,9 +1,8 @@
 package com.mycompany.app;
 
 import java.time.LocalDate;
-// MAKE USER CLASS ABSTRACT AFTER CREATION OF LISTENER.JAVA
 // CHANGE PLAYLIST.JAVA CONSTRUCTOR TO ONLY ACCEPT LISTENERS AS CREATORS
-public class User {
+public abstract class User {
     private String name;
     private Origin origin;
     private LocalDate creationDate;

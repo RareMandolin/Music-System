@@ -35,7 +35,7 @@ public class Artist extends User {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (!super.equals(obj)) return false;
         Artist that = (Artist) obj;
         
         return genre == that.getGenre()

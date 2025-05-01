@@ -14,7 +14,7 @@ public class TestPlaylist {
     
     @Test
     public void testMakeVisible() {
-        Playlist playlist = new Playlist("Main", new User("name", Origin.AF));
+        Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
         boolean expected = false;
         boolean result = playlist.isVisible();
 
@@ -29,7 +29,7 @@ public class TestPlaylist {
 
     @Test
     public void testAdd() {
-        Playlist playlist = new Playlist("Main", new User("name", Origin.AF));
+        Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
         Song song = new Song("SongName", new Artist("drake", Origin.NA, Genre.RAP), 20, Genre.CLASSICAL);
         playlist.add(song);
 
@@ -41,7 +41,7 @@ public class TestPlaylist {
 
     @Test
     public void testAddMultipleSongs() {
-        Playlist playlist = new Playlist("Main", new User("name", Origin.AF));
+        Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
         Song song1 = new Song("Song1Name", new Artist("drake", Origin.NA, Genre.RAP), 20, Genre.CLASSICAL);
         Song song2 = new Song("Song2Name", new Artist("drake", Origin.NA, Genre.RAP), 20, Genre.CLASSICAL);
         playlist.add(Arrays.asList(song1, song2));

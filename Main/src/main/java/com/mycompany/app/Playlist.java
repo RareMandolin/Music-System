@@ -9,17 +9,19 @@ public class Playlist extends LibraryItem {
     private boolean isVisible;
 
     public Playlist(String name, User creator) {
-        super(name, creator, 0);
+        super(name, creator);
         tracks = new ArrayList<>();
         tracksQuantity = 0;
         isVisible = false;
     }
 
-    public Playlist(String name, User creator, Playlist playlist) {
-        super(name, creator, playlist.getLength());
-        tracks = new ArrayList<>(playlist.getTracks());
-        tracksQuantity = playlist.getTracksQuantity();
+    public Playlist(String name, Listener creator, List<Song> playlist) {
+        super(name, creator);
+        tracks = new ArrayList<>();
+        tracksQuantity = playlist.size();
         isVisible = false;
+
+        for (Song song : playlist) add(song);
     }
 
     public boolean makeVisible() {
@@ -29,21 +31,28 @@ public class Playlist extends LibraryItem {
         return true;
     }
 
-    public boolean add(Song song) {
-        if (song == null || tracks.contains(song)) return false;
-        tracks.add(song);
-        tracksQuantity++;
+    public boolean makePrivate() {
+        if (!isVisible) return false;
+
+        isVisible = false;
 
         return true;
     }
 
-    public boolean add(List<Song> songs) {
-        if (songs == null) return false;
+    public boolean add(Song song) {
+        if (song == null || tracks.contains(song)) return false;
+        
+        tracks.add(song);
+        tracksQuantity++;
+        setLength(getLength() + song.getLength());
 
-        boolean successful = false;
-        for (Song song : songs) successful = add(song);
+        return true;
+    }
 
-        return successful;
+    public void add(List<Song> songs) {
+        if (songs == null) return;
+
+        for (Song song : songs) System.out.println(add(song));
     }
 
     public void export() {
@@ -59,18 +68,16 @@ public class Playlist extends LibraryItem {
     }
 
     public String toString() {
-        return String.format("Playlist{%1s, %2s, %3d, %4b}", super.toString(), tracks.toString(), tracksQuantity, isVisible);
+        return String.format("Playlist{%1s, %2s, %3f, %4b}", super.toString(), tracks.toString(), tracksQuantity, isVisible);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-       
+        if (!super.equals(obj)) return false;
         Playlist that = (Playlist) obj;
 
-        return tracks.equals(that.getTracks())
-            && tracksQuantity == that.getTracksQuantity()
-            && isVisible == that.isVisible();
+        return tracks.equals(that.getTracks());
     }
 
     public List<Song> getTracks() {
