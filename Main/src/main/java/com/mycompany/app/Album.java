@@ -11,12 +11,12 @@ public class Album extends LibraryItem {
     private boolean isReleased;
     private Genre genre;
 
-    public Album(String name, Artist creator, boolean isReleased) {
+    public Album(String name, Artist creator) {
         super(name, creator, 0);
         tracks = new HashSet<>();
         artists = new HashSet<>();
         tracksQuantity = 0;
-        this.isReleased = isReleased;
+        isReleased = false;
     }
 
     public boolean release() {
@@ -27,7 +27,10 @@ public class Album extends LibraryItem {
     }
 
     public boolean add(Song song) {
-        if (tracks.contains(song)) return false;
+        if (song == null
+        || tracks.contains(song)
+        || !song.getCreator().equals(getCreator())) return false;
+
         tracks.add(song);
         tracksQuantity++;
 
@@ -36,6 +39,8 @@ public class Album extends LibraryItem {
     }
 
     public boolean add(List<Song> songs) {
+        if (songs == null) return false;
+
         boolean successful = false;
         for (Song song : songs) successful = add(song);
 
@@ -56,7 +61,7 @@ public class Album extends LibraryItem {
             && artists.equals(that.getArtists())
             && tracksQuantity == that.getTracksQuantity()
             && isReleased == that.isReleased()
-            && genre.equals(that.getGenre());
+            && genre == that.getGenre();
     }
 
     public Set<Song> getTracks() {

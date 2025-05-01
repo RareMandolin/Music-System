@@ -8,6 +8,7 @@ public class Song extends LibraryItem {
     public Song(String name, Artist creator, double length, Genre genre) {
         super(name, creator, length);
         this.genre = genre;
+        //AUTO ADD SONG TO ARTIST TRACK LIST??
     }
 
     public class SongComparator implements Comparator<Song> {
@@ -38,10 +39,10 @@ public class Song extends LibraryItem {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        
         Song that = (Song) obj;
 
-        return genre.equals(that.getGenre());
+        return genre == that.getGenre();
     }
 
     public Genre getGenre() {

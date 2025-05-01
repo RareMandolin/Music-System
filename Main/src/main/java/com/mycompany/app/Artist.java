@@ -19,10 +19,12 @@ public class Artist extends User {
 
     public boolean createSong() {
         //TODO
+        return false;
     }
 
     public boolean createAlbum() {
         //TODO
+        return false;
     }
 
     @Override
@@ -33,9 +35,10 @@ public class Artist extends User {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        
         Artist that = (Artist) obj;
-        return genre.equals(that.getGenre())
+        
+        return genre == that.getGenre()
             && songs.equals(that.getSongs())
             && albums.equals(that.getAlbums());
     }

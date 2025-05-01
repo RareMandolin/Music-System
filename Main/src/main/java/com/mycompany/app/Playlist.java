@@ -10,13 +10,16 @@ public class Playlist extends LibraryItem {
 
     public Playlist(String name, User creator) {
         super(name, creator, 0);
+        tracks = new ArrayList<>();
+        tracksQuantity = 0;
+        isVisible = false;
     }
 
-    public Playlist(String name, User creator, Playlist playlist, boolean isVisible) {
+    public Playlist(String name, User creator, Playlist playlist) {
         super(name, creator, playlist.getLength());
         tracks = new ArrayList<>(playlist.getTracks());
         tracksQuantity = playlist.getTracksQuantity();
-        this.isVisible = isVisible;
+        isVisible = false;
     }
 
     public boolean makeVisible() {
@@ -27,7 +30,7 @@ public class Playlist extends LibraryItem {
     }
 
     public boolean add(Song song) {
-        if (tracks.contains(song)) return false;
+        if (song == null || tracks.contains(song)) return false;
         tracks.add(song);
         tracksQuantity++;
 
@@ -35,6 +38,8 @@ public class Playlist extends LibraryItem {
     }
 
     public boolean add(List<Song> songs) {
+        if (songs == null) return false;
+
         boolean successful = false;
         for (Song song : songs) successful = add(song);
 
@@ -47,6 +52,8 @@ public class Playlist extends LibraryItem {
     }
 
     public void export(String path) {
+        if (path == null) return;
+
         final String PATH = path;
         //TODO
     }
@@ -58,7 +65,7 @@ public class Playlist extends LibraryItem {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+       
         Playlist that = (Playlist) obj;
 
         return tracks.equals(that.getTracks())

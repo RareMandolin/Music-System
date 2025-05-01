@@ -1,8 +1,9 @@
 package com.mycompany.app;
 
 import java.time.LocalDate;
-
-public abstract class User {
+// MAKE USER CLASS ABSTRACT AFTER CREATION OF LISTENER.JAVA
+// CHANGE PLAYLIST.JAVA CONSTRUCTOR TO ONLY ACCEPT LISTENERS AS CREATORS
+public class User {
     private String name;
     private Origin origin;
     private LocalDate creationDate;
@@ -16,7 +17,7 @@ public abstract class User {
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+    
         User that = (User) obj;
         return name.equals(that.getName())
             && origin.equals(that.getOrigin())
