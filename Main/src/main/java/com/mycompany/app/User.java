@@ -1,11 +1,11 @@
 package com.mycompany.app;
 
 import java.time.LocalDate;
-// CHANGE PLAYLIST.JAVA CONSTRUCTOR TO ONLY ACCEPT LISTENERS AS CREATORS
+
 public abstract class User {
-    private String name;
-    private Origin origin;
-    private LocalDate creationDate;
+    protected String name;
+    protected Origin origin;
+    protected LocalDate creationDate;
 
     public User(String name, Origin origin) {
         this.name = name;

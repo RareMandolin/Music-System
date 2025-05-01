@@ -8,7 +8,7 @@ public class Playlist extends LibraryItem {
     private int tracksQuantity;
     private boolean isVisible;
 
-    public Playlist(String name, User creator) {
+    public Playlist(String name, Listener creator) {
         super(name, creator);
         tracks = new ArrayList<>();
         tracksQuantity = 0;

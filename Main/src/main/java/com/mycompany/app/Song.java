@@ -6,8 +6,9 @@ public class Song extends LibraryItem {
     private Genre genre;
 
     public Song(String name, Artist creator, double length, Genre genre) {
-        super(name, creator, length);
+        super(name, creator);
         this.genre = genre;
+        setLength(length);
         //AUTO ADD SONG TO ARTIST TRACK LIST??
     }
 

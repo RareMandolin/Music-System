@@ -2,12 +2,12 @@ package com.mycompany.app;
 
 import java.time.LocalDate;
 
-public class LibraryItem {
-    private int id;
-    private String name;
-    private User creator;
-    private double length;
-    private LocalDate creationDate;
+public abstract class LibraryItem {
+    protected int id;
+    protected String name;
+    protected User creator;
+    protected double length;
+    protected LocalDate creationDate;
 
     private static int nextId = 1;
 
@@ -55,28 +55,16 @@ public class LibraryItem {
         return length;
     }
 
+    public void setLength(double length) {
+        this.length = length;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
     }
 
     public enum Genre {
