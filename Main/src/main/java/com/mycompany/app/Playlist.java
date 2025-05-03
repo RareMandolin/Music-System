@@ -1,5 +1,7 @@
 package com.mycompany.app;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class Playlist extends LibraryItem {
     public void add(List<Song> songs) {
         if (songs == null) return;
 
-        for (Song song : songs) System.out.println(add(song));
+        for (Song song : songs) add(song);
     }
 
     public void export() {
@@ -60,11 +62,20 @@ public class Playlist extends LibraryItem {
         export(PATH);
     }
 
-    public void export(String path) {
-        if (path == null) return;
+    public void export(final String PATH) {
+        if (PATH == null) return;
+        if (!PATH.substring(PATH.length() - 4, PATH.length()).equals(".csv")) 
+        throw new RuntimeException("File type must be CSV");
 
-        final String PATH = path;
-        //TODO
+        try (FileWriter fw = new FileWriter(PATH)) {
+            for (int i = 0; i < tracks.size(); i++) {
+                fw.write((i + 1) + ". ");
+                fw.write(tracks.get(i).getName() + ", ");
+                fw.write(tracks.get(i).getCreator().getName() + ", ");
+                fw.write(tracks.get(i).getLength() + ", ");
+                fw.write(tracks.get(i).getGenre() + "\n");
+            }
+        } catch (IOException e) {e.printStackTrace();}
     }
 
     public String toString() {

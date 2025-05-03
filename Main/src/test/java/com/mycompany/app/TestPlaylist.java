@@ -1,5 +1,8 @@
 package com.mycompany.app;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,5 +53,23 @@ public class TestPlaylist {
         List<Song> result = playlist.getTracks();
 
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testExport() {
+        Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
+        Song song1 = new Song("Song1Name", new Artist("drake", Origin.NA, Genre.RAP), 20, Genre.CLASSICAL);
+        Song song2 = new Song("Song2Name", new Artist("drake", Origin.NA, Genre.RAP), 20, Genre.CLASSICAL);
+        playlist.add(Arrays.asList(song1, song2));
+
+        String expected = "1. Song1Name, drake, 20.0, CLASSICAL\n2. Song2Name, drake, 20.0, CLASSICAL\n";
+        String result = null;
+
+        playlist.export();
+        try {
+            result = Files.readString(Paths.get("C:\\Users\\Admin\\Desktop\\MusicSystem\\Main\\src\\resources\\export.csv"));
+        } catch (IOException e) {e.printStackTrace();}
+        
+        Assertions.assertEquals(result, expected);
     }
 }
