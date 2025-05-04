@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Album extends LibraryItem {
+public class Album extends LibraryItem implements Playable {
     private Set<Song> tracks;
     private Set<Artist> artists;
     private int tracksQuantity;
@@ -17,8 +17,13 @@ public class Album extends LibraryItem {
         artists = new HashSet<>();
         tracksQuantity = 0;
         isReleased = false;
+        creator.getAlbums().add(this);
     }
 
+    /**
+     * Releases the album 
+     * @return whether the album was successfully released or not
+     */
     public boolean release() {
         if (isReleased) return false;
 
@@ -26,6 +31,11 @@ public class Album extends LibraryItem {
         return true;
     }
 
+    /**
+     * Adds a song to the album tracklist
+     * @param song A song to be added to the album
+     * @return whether or not the song was successfully added
+     */
     public boolean add(Song song) {
         if (song == null
         || tracks.contains(song)
@@ -39,10 +49,26 @@ public class Album extends LibraryItem {
         return true;
     }
 
+    /**
+     * Adds multiple songs to the album
+     * @param songs the list of songs to be added
+     */
     public void add(List<Song> songs) {
         if (songs == null) return;
 
         for (Song song : songs) add(song);
+    }
+
+    /**
+     * Plays an album for a given user
+     * @param listener the user for which the album will be played for
+     */
+    public void play(Listener listener) {
+        listener.clearQueue();
+
+        for (Song song : tracks) if (song != null) listener.addToQueue(song);
+
+        listener.startPlayback();
     }
 
     public String toString() {

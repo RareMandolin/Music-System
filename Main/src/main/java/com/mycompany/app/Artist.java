@@ -17,14 +17,42 @@ public class Artist extends User {
         albums = new HashSet<>();
     }
 
-    public boolean createSong() {
-        //TODO
-        return false;
+    /**
+     * Creates a song for the artist
+     * @param name the name of the song
+     * @param length the length of the song
+     * @param genre the genre of the song
+     * @return whether the song was successfully created
+     */
+    public boolean createSong(String name, double length, Genre genre) {
+        if (name == null || genre == null) return false;
+
+        for (Song song : songs) {
+            if (song.getName().equals(name)
+            && song.getLength() == length
+            && song.getGenre().equals(genre)) return false;
+        }
+
+        songs.add(new Song(name, this, length, genre));
+
+        return true;
     }
 
-    public boolean createAlbum() {
-        //TODO
-        return false;
+    /**
+     * Creates an album for the artist
+     * @param name the name of the album
+     * @return whether the album was succcessfully created
+     */
+    public boolean createAlbum(String name) {
+        if (name == null) return false;
+
+        for (Album album : albums) {
+            if (album.name.equals(name)) return false;
+        }
+
+        albums.add(new Album(name, this));
+
+        return true;
     }
 
     @Override

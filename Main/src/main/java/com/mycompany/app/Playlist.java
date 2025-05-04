@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Playlist extends LibraryItem {
+public class Playlist extends LibraryItem implements Playable {
     private List<Song> tracks;
     private int tracksQuantity;
     private boolean isVisible;
@@ -15,6 +15,7 @@ public class Playlist extends LibraryItem {
         tracks = new ArrayList<>();
         tracksQuantity = 0;
         isVisible = false;
+        creator.getLibrary().add(this);
     }
 
     public Playlist(String name, Listener creator, List<Song> playlist) {
@@ -22,10 +23,25 @@ public class Playlist extends LibraryItem {
         tracks = new ArrayList<>();
         tracksQuantity = playlist.size();
         isVisible = false;
+        creator.getLibrary().add(this);
 
         for (Song song : playlist) add(song);
     }
 
+    /**
+     * Plays the playlist for a given user
+     * @param listener the listener for which the playlist will be played for
+     */
+    public void play(Listener listener) {
+        listener.clearQueue();
+        listener.addToQueue(tracks);
+        listener.startPlayback();
+    }
+
+    /**
+     * Makes the playlist visible
+     * @return whether the playlist was successfully made visible
+     */
     public boolean makeVisible() {
         if (isVisible) return false;
 
@@ -33,6 +49,10 @@ public class Playlist extends LibraryItem {
         return true;
     }
 
+    /**
+     * Makes the playlist private
+     * @return whether the playlist was successfully made private
+     */
     public boolean makePrivate() {
         if (!isVisible) return false;
 
@@ -41,6 +61,11 @@ public class Playlist extends LibraryItem {
         return true;
     }
 
+    /**
+     * Adds a given song to the playlist
+     * @param song the song to be added
+     * @return whether the song was successfully added to the playlist
+     */
     public boolean add(Song song) {
         if (song == null || tracks.contains(song)) return false;
         
@@ -51,17 +76,28 @@ public class Playlist extends LibraryItem {
         return true;
     }
 
+    /**
+     * Adds multiple songs to the playlist
+     * @param songs the list of songs to be added
+     */
     public void add(List<Song> songs) {
         if (songs == null) return;
 
         for (Song song : songs) add(song);
     }
 
+    /**
+     * Exports the information of each song in the playlist
+     */
     public void export() {
         final String PATH = "C:\\Users\\Admin\\Desktop\\MusicSystem\\Main\\src\\resources\\export.csv";
         export(PATH);
     }
 
+    /**
+     * Exports the information of each song in the playlist to a given location
+     * @param PATH the location to which the song information will be exported
+     */
     public void export(final String PATH) {
         if (PATH == null) return;
         if (!PATH.substring(PATH.length() - 4, PATH.length()).equals(".csv")) 

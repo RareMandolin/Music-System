@@ -2,14 +2,22 @@ package com.mycompany.app;
 
 import java.util.Comparator;
 
-public class Song extends LibraryItem {
+public class Song extends LibraryItem implements Playable {
     private Genre genre;
 
     public Song(String name, Artist creator, double length, Genre genre) {
         super(name, creator);
         this.genre = genre;
         setLength(length);
-        //AUTO ADD SONG TO ARTIST TRACK LIST??
+        creator.getSongs().add(this);
+    }
+
+    /**
+     * Plays the song for a given listener
+     * @param listener the listener for which the song will be played
+     */
+    public void play(Listener listener) {
+        listener.startPlayback(this);
     }
 
     public class SongComparator implements Comparator<Song> {
