@@ -60,7 +60,7 @@ public class Album extends LibraryItem implements Playable {
     }
 
     /**
-     * Plays an album for a given user
+     * Plays the album for a given user
      * @param listener the user for which the album will be played for
      */
     public void play(Listener listener) {

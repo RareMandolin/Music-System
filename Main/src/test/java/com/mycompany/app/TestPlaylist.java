@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Queue;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,24 @@ import com.mycompany.app.LibraryItem.Genre;
 import com.mycompany.app.User.Origin;
 
 public class TestPlaylist {
-    
+    @Test
+    public void testPlay() {
+        Listener listener = new Listener("name", Origin.AF, Genre.JAZZ);
+        Playlist playlist = new Playlist("Main", listener);
+
+        playlist.add(Arrays.asList(new Song("NAME1", new Artist("DRAKE", Origin.AF, Genre.CLASSICAL), 0, Genre.CLASSICAL),
+                                    new Song("NAME2", new Artist("DRAKE", Origin.AF, Genre.CLASSICAL), 0, Genre.CLASSICAL)));
+        playlist.play(listener);
+
+        Song result1 = listener.getCurrentlyPlaying();
+        Song expected1 = playlist.getTracks().get(0);
+        Assertions.assertEquals(result1, expected1);
+
+        Queue<Song> result2 = listener.getQueue();
+        List<Song> expected2 = playlist.getTracks().subList(1, playlist.getTracks().size());
+        Assertions.assertEquals(result2, expected2);
+    }
+
     @Test
     public void testMakeVisible() {
         Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
@@ -25,6 +43,22 @@ public class TestPlaylist {
 
         playlist.makeVisible();
         expected = true;
+        result = playlist.isVisible();
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMakePrivate() {
+        Playlist playlist = new Playlist("Main", new Listener("name", Origin.AF, Genre.JAZZ));
+        playlist.makeVisible();
+        boolean expected = true;
+        boolean result = playlist.isVisible();
+
+        Assertions.assertEquals(expected, result);
+
+        playlist.makePrivate();
+        expected = false;
         result = playlist.isVisible();
 
         Assertions.assertEquals(expected, result);

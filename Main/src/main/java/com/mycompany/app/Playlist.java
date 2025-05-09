@@ -38,6 +38,10 @@ public class Playlist extends LibraryItem implements Playable {
         listener.startPlayback();
     }
 
+    public void sort() {
+        //TODO
+    }
+
     /**
      * Makes the playlist visible
      * @return whether the playlist was successfully made visible
