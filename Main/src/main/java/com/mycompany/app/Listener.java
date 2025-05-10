@@ -176,7 +176,7 @@ public class Listener extends User {
 
     @Override
     public String toString() {
-        return String.format("Playlist{%1s, %2b, %3s, %4s, %5s, %6s}", super.toString(), isVisble, 
+        return String.format("Listener{%1s, %2b, %3s, %4s, %5s, %6s}", super.toString(), isVisble, 
         favGenre, library, queue, currentlyPlaying);
     }
 

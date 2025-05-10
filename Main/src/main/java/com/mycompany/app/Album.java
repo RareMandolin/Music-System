@@ -9,7 +9,6 @@ public class Album extends LibraryItem implements Playable {
     private Set<Artist> artists;
     private int tracksQuantity;
     private boolean isReleased;
-    private Genre genre;
 
     public Album(String name, Artist creator) {
         super(name, creator);
@@ -72,7 +71,7 @@ public class Album extends LibraryItem implements Playable {
     }
 
     public String toString() {
-        return String.format("Album{%1s, %2s, %3s, %4d, %5b, %6s}", super.toString(), tracks.toString(), artists.toString(), tracksQuantity, isReleased, genre);
+        return String.format("Album{%1s, %2s, %3s, %4d, %5b}", super.toString(), tracks.toString(), artists.toString(), tracksQuantity, isReleased);
     }
 
     @Override
@@ -84,8 +83,7 @@ public class Album extends LibraryItem implements Playable {
         return tracks.equals(that.getTracks())
             && artists.equals(that.getArtists())
             && tracksQuantity == that.getTracksQuantity()
-            && isReleased == that.isReleased()
-            && genre == that.getGenre();
+            && isReleased == that.isReleased();
     }
 
     public Set<Song> getTracks() {
@@ -102,13 +100,5 @@ public class Album extends LibraryItem implements Playable {
 
     public boolean isReleased() {
         return isReleased;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 }
