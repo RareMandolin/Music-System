@@ -1,6 +1,6 @@
 package com.mycompany.app;
 
-public class Song extends LibraryItem implements Playable {
+public class Song extends LibraryItem implements Playable, Comparable<Song> {
     private Genre genre;
 
     public Song(String name, Artist creator, double length, Genre genre) {
@@ -16,6 +16,12 @@ public class Song extends LibraryItem implements Playable {
      */
     public void play(Listener listener) {
         listener.startPlayback(this);
+    }
+
+    @Override
+    public int compareTo(Song s) {
+        return (int) ((id - s.getId()) * 10
+        + (length - s.getLength()));
     }
 
     public String toString() {
