@@ -40,7 +40,7 @@ public abstract class LibraryItem {
     }
 
     public String toString() {
-        return String.format("LibraryItem{%1s, %2s, %3f, %4s}", name, creator.toString(), length, creationDate);
+        return String.format("%1s, %2s, %3f, %4s", name, creator.getName(), length, creationDate);
     }
 
     public String getName() {

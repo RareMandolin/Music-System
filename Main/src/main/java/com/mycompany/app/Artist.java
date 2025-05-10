@@ -10,6 +10,13 @@ public class Artist extends User {
     private Set<Song> songs;
     private Set<Album> albums;
 
+    public Artist() {
+        super();
+        genre = null;
+        songs = new HashSet<>();
+        albums = new HashSet<>();
+    }
+
     public Artist(String name, Origin origin, Genre genre) {
         super(name, origin);
         this.genre = genre;
@@ -57,7 +64,7 @@ public class Artist extends User {
 
     @Override
     public String toString() {
-        return String.format("User{%1s, %2s, %3s, %4s}", super.toString(), genre, songs.toString(), albums.toString());
+        return String.format("Artist{%1s, %2s, %3s, %4s}", super.toString(), genre, songs.toString(), albums.toString());
     }
 
     @Override

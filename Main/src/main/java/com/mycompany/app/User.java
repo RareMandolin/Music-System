@@ -7,6 +7,12 @@ public abstract class User {
     protected Origin origin;
     protected LocalDate creationDate;
 
+    public User() {
+        name = "NaN";
+        origin = null;
+        creationDate = LocalDate.now();
+    }
+
     public User(String name, Origin origin) {
         this.name = name;
         this.origin = origin;
@@ -19,13 +25,13 @@ public abstract class User {
     
         User that = (User) obj;
         return name.equals(that.getName())
-            && origin.equals(that.getOrigin())
+            && origin == that.getOrigin()
             && creationDate.equals(that.getCreationDate());
     }
 
     @Override
     public String toString() {
-        return String.format("User{%1s, %2s, %3s}", name, origin, creationDate);
+        return String.format("%1s, %2s, %3s", name, origin, creationDate);
     }
 
     public String getName() {

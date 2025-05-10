@@ -31,12 +31,12 @@ public class TestAlbum {
         Album album = new Album("Main", new Artist("Drake", Origin.EU, Genre.POP));
         Song song = new Song("SongName", new Artist("Drake", Origin.EU, Genre.POP), 20, Genre.CLASSICAL);
         album.add(song);
-
+    
         Set<Song> expected = new HashSet<Song>(Arrays.asList(song));
         Set<Song> result = album.getTracks();
 
-        Assertions.assertEquals(album.getTracksQuantity(), 1);
         Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(album.getTracksQuantity(), 1);
     }
 
     @Test

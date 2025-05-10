@@ -15,6 +15,15 @@ public class Listener extends User {
     private Queue<Song> queue;
     private Song currentlyPlaying;
 
+    public Listener() {
+        super();
+        isVisble = false;
+        library = new HashSet<>();
+        queue = new LinkedList<>();
+        favGenre = null;
+        currentlyPlaying = null;
+    }
+
     public Listener(String name, Origin origin, Genre favGenre) {
         super(name, origin);
         isVisble = true;

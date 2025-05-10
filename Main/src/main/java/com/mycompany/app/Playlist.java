@@ -3,6 +3,7 @@ package com.mycompany.app;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Playlist extends LibraryItem implements Playable {
@@ -38,8 +39,14 @@ public class Playlist extends LibraryItem implements Playable {
         listener.startPlayback();
     }
 
-    public void sort() {
-        //TODO
+    /**
+     * Sorts the playlist tracks based on a given criteria
+     * @param criteria the criteria to sort the playlist based on
+     */
+    public void sort(SongComparator.Criteria criteria) {
+        if (criteria == null) return;
+
+        Collections.sort(tracks, new SongComparator(criteria));
     }
 
     /**
@@ -119,7 +126,7 @@ public class Playlist extends LibraryItem implements Playable {
     }
 
     public String toString() {
-        return String.format("Playlist{%1s, %2s, %3f, %4b}", super.toString(), tracks.toString(), tracksQuantity, isVisible);
+        return String.format("Playlist{%1s, %2s, %3d, %4b}", super.toString(), tracks.toString(), tracksQuantity, isVisible);
     }
 
     @Override

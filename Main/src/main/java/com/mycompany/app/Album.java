@@ -39,7 +39,7 @@ public class Album extends LibraryItem implements Playable {
     public boolean add(Song song) {
         if (song == null
         || tracks.contains(song)
-        || !song.getCreator().equals(getCreator())) return false;
+        || !song.getCreator().getName().equals(getCreator().getName())) return false;
 
         tracks.add(song);
         tracksQuantity++;
